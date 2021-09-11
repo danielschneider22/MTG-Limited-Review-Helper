@@ -10,7 +10,14 @@
                   <th>Your Rating</th>
                 </tr>
                 <tr *ngIf="currentGameCard.type_line.indexOf('Land')==-1">
-                    <td><img [src]="currentGameCard.image_uris.normal" class="expandImage" /></td>                
+                    <td>
+                      <img [src]="card.image_uris
+                      ? card.image_uris.normal
+                      : card.card_faces[0].image_uris.normal" class="expandImage" />
+                      <img *ngIf="card.card_faces && card.card_faces[1].image_uris.normal"
+                        [src]="card.card_faces[1].image_uris.normal" class="expandImage"
+                      >
+                    </td>                
                     <td>
                       <span *ngFor="let rating of [0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0]">
                           <button class="gridButton" [ngStyle]="{'background-color':currentGameCard.userRating == rating ? '#6acfcf' : 'white'}" (click) = "rateCard(rating)" [disabled]="currentGameCard.hasBeenSaved">{{rating}}</button>

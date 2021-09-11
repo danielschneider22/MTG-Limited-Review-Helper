@@ -46,8 +46,15 @@
           </tr>
           <ng-container *ngFor="let card of cardFilter.displayCards" >
             <tr>
-              <td><img [src]="card.image_uris.normal"  [class.expandImage]="expandImages === true" [class.contractImage]="expandImages !== true"/></td>
-              <td *ngIf="!mobile">{{card.name}}</td>
+              <td>
+                <img [src]="card.image_uris
+                ? card.image_uris.normal
+                : card.card_faces[0].image_uris.normal" class="expandImage" />
+                <img *ngIf="card.card_faces && card.card_faces[1].image_uris.normal"
+                  [src]="card.card_faces[1].image_uris.normal" class="expandImage"
+                >
+
+              </td>
               <td>
                 <div [ngClass]="{'reviewTextMobile': mobile, 'reviewText': !mobile}">
                   {{card.user1Rating}}

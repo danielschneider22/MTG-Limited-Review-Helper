@@ -55,6 +55,10 @@
                 [class.expandImage]="expandImages === true"
                 [class.contractImage]="expandImages !== true"
               />
+              <img *ngIf="card.card_faces && card.card_faces[1].image_uris.normal"
+                  [src]="card.card_faces[1].image_uris.normal" [class.expandImage]="expandImages === true"
+                  [class.contractImage]="expandImages !== true"
+                >
             </td>
             <td>
               <span

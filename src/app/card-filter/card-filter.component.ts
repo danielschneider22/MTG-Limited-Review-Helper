@@ -148,6 +148,7 @@ export class CardFilterComponent implements OnInit {
         (that.showOnlyUnrated ||
           !that.ratingMax ||
           that.ratingMax >= card.userRating) &&
+        // ((card as any).image_uris) &&
         (!that.cardNameSearchPhrase ||
           card.name
             .toLowerCase()
