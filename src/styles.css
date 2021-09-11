@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import './styles/toastr-style.css';
+/*@import "~font-awesome/css/font-awesome.css";*/
+
+input:disabled {
+    background-color: #d4d4d4;;
+    border-width:.5px;
+}
+
+.pull-right{
+    float:right;
+}
+body{
+    font-family:"helvetica";
+}
+
+/*change */

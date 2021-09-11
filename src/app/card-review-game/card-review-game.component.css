@@ -1,0 +1,115 @@
+#ratingTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#ratingTable td, #ratingTable th {
+    border: 1px solid #ddd;
+    text-align:center;
+}
+
+.textTd {
+    font-size:12px;
+}
+
+#ratingTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#comparisonTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    position: fixed;
+    left: 0;
+    bottom: 80px;
+    height: 75px;
+}
+
+#comparisonTable td, #comparisonTable th {
+    border: 1px solid #ddd;
+    text-align:center;
+}
+
+#comparisonTable th {
+    background-color:#dfffe0;
+    font-weight:normal;
+}
+
+#comparisonTable tr:nth-child(even){background-color: #f2f2f2;}
+
+.expandImage{
+    min-width:150px;
+    max-width:150px
+}
+
+#ratingTable th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.saveButton{
+    background-color: #4caf50;
+    font-weight: bold;
+    text-shadow: 1px 1px #000000;
+    color: #ffffff;
+    border: 1px solid #030503;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+    -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset;
+}
+
+.setReviewerContainer{
+    height:60px
+}
+
+footer {
+    background-color: #F8F8F8;
+    border-top: 1px solid #E7E7E7;
+    text-align:center;
+    padding:10px;
+  
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+}
+
+.gridButton{
+    width:30%;
+    height:40px;
+    margin-bottom:5px;
+    padding:0px;
+}
+.innerSaveButton{
+    background-color: #4caf50;
+    padding-top:1px;
+}
+.footerButton{
+    height:100%
+}
+.footerButtonArrow{
+    background-color:transparent;
+    border:none;
+}
+.returnButton{
+    font-size:20px;
+    background-color:#d2d2d2;
+}
+
+.matchStyle{
+    color:#5959ff;
+}
+.minorDiffStyle{
+    color:green;
+}
+.mediumDiffStyle{
+    color:orange;
+}
+.majorDiffStyle{
+    color:red;
+}
+.extremeDiffStyle{
+    color:darkred;
+}

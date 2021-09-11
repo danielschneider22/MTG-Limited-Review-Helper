@@ -1,0 +1,70 @@
+<div class="container setReviewerContainer">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5" style="padding-top:10px;" [style.font-size] ="playingGame ? '5vh' : ''">{{!playingGame ? 'Card Review Game' : cardReviewGameSetup.selectedSetForGame.name}}</h1>
+        <app-card-review-game-setup (gameStartedEvent)="initializeGame()" [hidden]="playingGame"></app-card-review-game-setup>
+        <div *ngIf = "playingGame">
+            <table id="ratingTable">
+                <tr>
+                  <th>Card</th>
+                  <th>Your Rating</th>
+                </tr>
+                <tr *ngIf="currentGameCard.type_line.indexOf('Land')==-1">
+                    <td><img [src]="currentGameCard.image_uris.normal" class="expandImage" /></td>                
+                    <td>
+                      <span *ngFor="let rating of [0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0]">
+                          <button class="gridButton" [ngStyle]="{'background-color':currentGameCard.userRating == rating ? '#6acfcf' : 'white'}" (click) = "rateCard(rating)" [disabled]="currentGameCard.hasBeenSaved">{{rating}}</button>
+                      </span>
+                      <span>
+                          <button (click) = "saveRating()" class="innerSaveButton gridButton" [disabled]="!currentGameCard.hasChanged || currentGameCard.hasBeenSaved" [ngStyle]="{'opacity':currentGameCard.hasChanged ? 1 : .3}"><img src="../../assets/Images/save_icon.png" style="padding-bottom:3px;"/></button>
+                      </span>
+                    </td>
+                </tr>
+              </table>
+              <table id="comparisonTable">
+                <tr>
+                  <th style="width:50%">Reviewer</th>
+                  <th style="width:25%">LSV</th>
+                  <th style="width:25%">Avg User</th>
+                </tr>
+                <tr>
+                  <td class="textTd">Rating</td>  
+                  <td>{{getRating('LSV')}}</td>                
+                  <td>{{getRating('AVG')}}</td>
+                </tr>
+                <tr>
+                  <td class="textTd">Difference in ratings</td>  
+                  <td>{{getDifference('LSV')}}</td>                
+                  <td>{{getDifference('AVG')}}</td>
+                </tr>
+                <tr>
+                    <td class="textTd">Difference level</td>  
+                    <td [ngClass]="differenceRatingClasses(currentGameCard.differenceFromLSV,'LSV')">{{getDifferenceLevel('LSV')}}</td>                
+                    <td [ngClass]="differenceRatingClasses(currentGameCard.differenceFromAvgUser,'AVG')">{{getDifferenceLevel('AVG')}}</td>                
+                  </tr>
+                <tr>
+                  <td class="textTd">Average Rating Difference</td>  
+                  <td>{{getAverageRatingDifference('LSV')}}</td>                
+                  <td>{{getAverageRatingDifference('AVG')}}</td>   
+                </tr>
+              </table>
+        </div>
+      </div>
+      </div>
+</div>
+<footer *ngIf="playingGame">
+    <div style="height:75%">
+        <div class="progress" style="background-color:#adadad;">
+            <div class="progress-bar progress-bar-striped" role="progressbar" [style.width]="getProgressBarWidth()">
+              <span [style.width]="getProgressBarTextWidth()">{{numberOfReviewedCards > 0 ? (((numberOfReviewedCards/numberOfNonLandCardsInSet)*100) | number:'2.1-1') + '% Complete' : ''}}</span>
+            </div>
+        </div>
+        <div class="row" style="padding-top:5px;height:100%">
+            <button class="footerButton footerButtonArrow col-2" (click) = "previousButtonClicked()" *ngIf="ratedFromGameCardIndex != 0"><img src="../../assets/Images/left_icon.png"/></button>
+            <button class="footerButton returnButton col-4" [ngClass]="{'offset-4': ratedFromGameCardIndex == 0, 'offset-2': ratedFromGameCardIndex != 0}" (click) = "returnButtonClicked()">Return</button>
+            <button class="footerButton footerButtonArrow col-2 offset-2" (click) = "nextButtonClicked()" [disabled]="!currentGameCard.hasBeenSaved"><img src="../../assets/Images/right_icon.png"/></button>
+        </div>   
+    </div>
+</footer>
+
+  

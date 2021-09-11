@@ -1,0 +1,23 @@
+<div *ngIf="allSets.length == 0">Loading Set Data...</div>
+<div *ngIf="allSets.length > 0" class="card col-md-12 col-md-offset-4" style="margin-left:auto;margin-right:auto;background-color:#e5fdff8a;">
+    <div class="login__card">
+      <div class="card-block container" style="margin-top:10px;text-align:center">
+        <h5 style="margin:5px;padding-left:10px">Pick a set:</h5>
+        <div class="form-group col-md-4" style="margin:auto;margin-bottom:20px">
+          <select id="setFilter" class="form-control" [(ngModel)]="selectedSet">
+            <option *ngFor="let set of allSets" [ngValue]="set">{{set.name}}</option>
+          </select>
+          <!--<div style="padding-top:10px"><input type="checkbox" [(ngModel)]="showOnlyUnratedCards">Show only Unrated Cards</div>-->
+          <button class="playButton" (click) = "playGame()">Play!</button>
+        </div>
+      </div>
+    </div>
+</div>
+<div *ngIf="allSets.length > 0" style="font-size:14px;padding-top:30px">
+  <p>Rate random cards by selecting a rating and clicking the green save icon.</p>
+  <p>The game keeps track of how you compare to the average user and LSV as you play.</p>
+  <p>Click the next arrow to rate your next card and the previous arrow to see previous ratings.</p>
+  <p>Click return to get back to this screen.</p>
+  <p>If you are logged in, ratings are automatically added to your set review.</p>
+  <p>Guidelines for ratings can be found <a [routerLink]="['../ratingsScaleHelp']">here</a>.</p>
+</div>

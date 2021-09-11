@@ -1,0 +1,206 @@
+<div *ngIf="allSets.length == 0">Loading Set Data...</div>
+<div
+  *ngIf="allSets.length > 0"
+  class="card col-md-12 col-md-offset-4"
+  style="margin-left:auto;margin-right:auto;background-color:#e5fdff8a;"
+>
+  <div class="login__card">
+    <div class="card-block container" style="margin-top:10px">
+      <h5 align="center" style="margin:5px;padding-left:10px">Card Filter</h5>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label for="setFilter">Set: </label>
+          <select
+            id="setFilter"
+            class="form-control"
+            [(ngModel)]="selectedSet"
+            (ngModelChange)="onSetFilterChange($event)"
+          >
+            <option *ngFor="let set of allSets" [ngValue]="set">{{
+              set.name
+            }}</option>
+          </select>
+        </div>
+        <div
+          class="form-group col-md-4"
+          *ngIf="!mobile || (selectedSet && showAdvancedOptions)"
+        >
+          <label for="typeFilter">Card Type: </label>
+          <select
+            [attr.disabled]="selectedSet ? null : ''"
+            id="typeFilter"
+            class="form-control"
+            [(ngModel)]="selectedCardType"
+            (ngModelChange)="onFilterChange($event)"
+          >
+            <option value="Creature">Creature</option>
+            <option value="Instant">Instant</option>
+            <option value="Sorcery">Sorcery</option>
+            <option value="Artifact">Artifact</option>
+            <option value="Enchantment">Enchantment</option>
+            <option value="Land">Land</option>
+            <option value="Planeswalker">Planeswalker</option>
+            <option value=""></option>
+          </select>
+        </div>
+        <div
+          class="form-group col-md-4"
+          *ngIf="!mobile || (selectedSet && showAdvancedOptions)"
+        >
+          <label for="rarityFilter">Card Rarity: </label>
+          <select
+            [attr.disabled]="selectedSet ? null : ''"
+            id="rarityFilter"
+            class="form-control"
+            [(ngModel)]="selectedCardRarity"
+            (ngModelChange)="onFilterChange($event)"
+          >
+            <option value="Common">Common</option>
+            <option value="Uncommon">Uncommon</option>
+            <option value="Rare">Rare</option>
+            <option value="Mythic">Mythic Rare</option>
+            <option value=""></option>
+          </select>
+        </div>
+        <div
+          class="form-group col-md-4"
+          *ngIf="!mobile || (selectedSet && showAdvancedOptions)"
+        >
+          <label for="groupingStatistics1">Group By: </label>
+          <select
+            [attr.disabled]="selectedSet ? null : ''"
+            id="groupingStatistics1"
+            class="form-control"
+            [(ngModel)]="groupingStatistics1"
+            (ngModelChange)="onFilterChange($event)"
+          >
+            <option value="cmc">Converted Mana Cost</option>
+            <option value="power">Power</option>
+            <option value="toughness">Toughness</option>
+            <option value=""></option>
+          </select>
+        </div>
+        <div
+          class="form-group col-md-4"
+          *ngIf="!mobile || (selectedSet && showAdvancedOptions)"
+        >
+          <label for="cardName">Card Name: </label>
+          <input
+            [attr.disabled]="selectedSet ? null : ''"
+            id="cardName"
+            class="form-control"
+            [(ngModel)]="cardNameSearchPhrase"
+            (ngModelChange)="onFilterChange($event)"
+          />
+        </div>
+        <div
+          class="form-group col-md-4"
+          *ngIf="
+            !hiddenFeaturesObject.hideRatingsOptions &&
+            (!mobile || (selectedSet && showAdvancedOptions))
+          "
+        >
+          <div *ngIf="!hiddenFeaturesObject.hideShowOnlyUnratedCheckbox">
+            <label for="showOnlyUnrated">Show Only Unrated </label>
+            <input
+              [attr.disabled]="selectedSet ? null : ''"
+              id="showOnlyUnrated"
+              type="checkbox"
+              [(ngModel)]="showOnlyUnrated"
+              (ngModelChange)="onFilterChange($event)"
+            />
+          </div>
+          <div *ngIf="!showOnlyUnrated">
+            <div>
+              <label for="ratingMin">Min Rating: </label>
+              <input
+                [attr.disabled]="selectedSet ? null : ''"
+                id="ratingMin"
+                style="width:50px"
+                type="number"
+                min="0"
+                max="5"
+                [(ngModel)]="ratingMin"
+                (ngModelChange)="onFilterChange($event)"
+              />
+            </div>
+            <div>
+              <label for="ratingMax">Max Rating: </label>
+              <input
+                [attr.disabled]="selectedSet ? null : ''"
+                id="ratingMax"
+                style="width:50px"
+                type="number"
+                min="0"
+                max="5"
+                [(ngModel)]="ratingMax"
+                (ngModelChange)="onFilterChange($event)"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="form-group col-md-4"
+          *ngIf="!mobile || (selectedSet && showAdvancedOptions)"
+        >
+          <span>Colors: </span>
+          <img
+            src="../../assets/Images/white_icon.png"
+            (click)="colorClicked('W')"
+            width="30"
+            height="30"
+            [ngStyle]="{ opacity: selectedColors.includes('W') ? 1 : 0.3 }"
+            style="padding-bottom:2px"
+          />
+          <img
+            src="../../assets/Images/blue_icon.png"
+            (click)="colorClicked('U')"
+            width="30"
+            height="30"
+            [ngStyle]="{ opacity: selectedColors.includes('U') ? 1 : 0.3 }"
+            style="padding-bottom:2px"
+          />
+          <img
+            src="../../assets/Images/black_icon.png"
+            (click)="colorClicked('B')"
+            width="30"
+            height="30"
+            [ngStyle]="{ opacity: selectedColors.includes('B') ? 1 : 0.3 }"
+            style="padding-bottom:2px"
+          />
+          <img
+            src="../../assets/Images/red_icon.png"
+            (click)="colorClicked('R')"
+            width="30"
+            height="30"
+            [ngStyle]="{ opacity: selectedColors.includes('R') ? 1 : 0.3 }"
+            style="padding-bottom:2px"
+          />
+          <img
+            src="../../assets/Images/green_icon.png"
+            (click)="colorClicked('G')"
+            width="30"
+            height="30"
+            [ngStyle]="{ opacity: selectedColors.includes('G') ? 1 : 0.3 }"
+            style="padding-bottom:2px"
+          />
+          <label for="colorsAreInclusive">Inclusive Colors</label>
+          <input
+            id="colorsAreInclusive"
+            type="checkbox"
+            [(ngModel)]="colorsAreInclusive"
+            (ngModelChange)="onFilterChange($event)"
+          />
+        </div>
+        <div class="form-group col-md-12" *ngIf="mobile">
+          <button
+            [disabled]="!selectedSet"
+            (click)="showAdvancedOptions = !showAdvancedOptions"
+          >
+            Toggle Advanced Options
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

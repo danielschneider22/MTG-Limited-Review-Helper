@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row jumbotron">
+    <div class="container col-lg-12">
+      <h2 class="display-5">Welcome to the MTG Limited Helper!</h2>
+      <p>We created this site to provide a resource for Magic the Gathering Limited players to pool knowledge and view cards for a given set.</p>
+    </div>
+  </div>
+  <div class="row" style="margin-bottom:20px">
+    <div class="col-lg-4 homepageContentCategory">
+      <h4><a class="nav-link homepageCategoryLink" [routerLink]="['../yourLimitedSetReviews']">REVIEW CARDS</a></h4>
+      <p>This site allows you to review MTG cards in a set and compare your reviews to both professionals (LSV and Limited Resources) and your friends. Guidelines for reviews found <a class="nav-link homepageCategoryLink" [routerLink]="['../ratingsScaleHelp']">here.</a></p> 
+      
+      <h5 style="padding-top:15px">
+        1. <a class="nav-link homepageCategoryLink" [routerLink]="['../cardReviewGame']">Card Review Game (Beta)</a>
+      </h5>
+      <p>Randomly review cards in a given set one-by-one and compare how your picks line up with LSV and average ratings.</p>
+      <div><a class="nav-link homepageCategoryLink" [routerLink]="['../cardReviewGame']"><img src="../../assets/Images/cardReviewGameImage.png"  width="300" height="131" style="border:1px solid black" /></a></div>
+      
+      <h5 class="homepageContentCategory">
+        2. <a class="nav-link homepageCategoryLink" [routerLink]="['../yourLimitedSetReviews']">Set Reviewer</a>
+      </h5>
+      <p>Review all the cards in a set. Once you are done check out how your review <a class="nav-link homepageCategoryLink" [routerLink]="['../compareReviews']">compares to others</a>.</p>
+      <div><a class="nav-link homepageCategoryLink" [routerLink]="['../compareReviews']"><img src="../../assets/Images/setReviewerImage.PNG"  width="300" height="191" style="border:1px solid black"/></a></div>
+    </div>
+
+    <div class="col-lg-4 homepageContentCategory">
+        <h4><a class="nav-link homepageCategoryLink" [routerLink]="['../compareReviews']">COMPARE REVIEWS</a></h4>
+        <p>Compare your set reviews to your friends, professionals, and the average user. Find cards you might have over or undervalued.</p> 
+        <a class="nav-link homepageCategoryLink" [routerLink]="['../compareReviews']"><img src="../../assets/Images/compareReviewsImage.PNG"  width="300" height="156" style="border:1px solid black" /></a>
+    </div>
+    <div class="col-lg-4 homepageContentCategory" >
+        <h4><a class="nav-link homepageCategoryLink" [routerLink]="['../setStatistics']">VIEW CARDS IN A SET</a></h4>
+        <p>View all the cards of a certain set, and filter by power, toughness, color, and other characteristics.</p> 
+        <a class="nav-link homepageCategoryLink" [routerLink]="['../setStatistics']"><img src="../../assets/Images/viewCardsOfSetImage.PNG"  width="300" height="150" style="border:1px solid black" /></a>
+    </div>
+</div>
+<router-outlet></router-outlet>

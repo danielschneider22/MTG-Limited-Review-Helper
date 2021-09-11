@@ -1,0 +1,77 @@
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h1 class="mt-5" style="padding-top:10px">Compare Reviews</h1>
+        <app-card-filter (dataChangeEvent)="dataChangeEvent(message)" (setLoadedEvent)="setLoadedEvent(message)"></app-card-filter>
+        <div class="row" style="margin-top:10px" *ngIf="cardFilter.allSets.length > 0">
+            <div class="form-group col-md-4 offset-md-2">
+                <label for="user1">User 1 </label>
+                <select [attr.disabled]="cardFilter.selectedSet && usersLoaded ? null : ''" id="user1" class="form-control" [(ngModel)]="user1" (ngModelChange)="onUserSelectedChanged($event)">
+                    <option *ngFor="let user of usersWhoHaveReviewedSelectedSet" [ngValue]="user">{{user.displayName}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="user2">User 2 </label>
+                <select [attr.disabled]="cardFilter.selectedSet && usersLoaded ? null : ''" id="user2" class="form-control" [(ngModel)]="user2" (ngModelChange)="onUserSelectedChanged($event)">
+                    <option *ngFor="let user of usersWhoHaveReviewedSelectedSet" [ngValue]="user">{{user.displayName}}</option>
+                </select>
+            </div>
+        </div>
+        <div *ngIf="cardFilter.allSets.length > 0" style="font-size:14px;padding-top:30px">
+            <p>Select a set and select two users to compare the reviews for that set.</p> 
+            <p>Guidelines for ratings can be found <a [routerLink]="['../ratingsScaleHelp']">here</a>.</p> 
+            <p *ngIf="mobile">Click Advanced Options to filter cards in the set.</p>
+        </div>
+        <div class="row" *ngIf="showRatingTable">
+            <div class="form-group col-md-12 text-center mediumTextSize">
+              Average Difference between Ratings: {{(averageDifference | number:'1.1-3')}}
+            </div>
+            <div [ngClass]="differenceRatingClasses(averageDifference)" class="form-group col-md-12 text-center mediumTextSize">
+                {{differenceRatingTextForm(averageDifference)}}
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top:20px;">
+      <div style="width:100%">
+        <table id="ratingTable" class="table" *ngIf="showRatingTable">
+          <tr>
+            <th><div>Card Images</div> <button (click) = "expandImages = !expandImages" style="margin-top:5px">{{expandImages ? "Shrink": "Expand"}}</button></th>
+            <th *ngIf="!mobile">Card Name</th>
+            <th style="font-size:12px">{{user1.displayName}} Rating</th>
+            <th *ngIf="!mobile">(=,>,<)</th>
+            <th style="font-size:12px">{{user2.displayName}} Rating</th>
+            <th><div>Rating Difference</div> <button (click)="sortByDifference()" style="margin-top:5px">{{sortingText}}</button></th>
+          </tr>
+          <ng-container *ngFor="let card of cardFilter.displayCards" >
+            <tr>
+              <td><img [src]="card.image_uris.normal"  [class.expandImage]="expandImages === true" [class.contractImage]="expandImages !== true"/></td>
+              <td *ngIf="!mobile">{{card.name}}</td>
+              <td>
+                <div [ngClass]="{'reviewTextMobile': mobile, 'reviewText': !mobile}">
+                  {{card.user1Rating}}
+                </div>
+              </td>
+              <td *ngIf="!mobile">
+                <div [ngClass]="{'reviewTextMobile': mobile, 'reviewText': !mobile}" class="reviewText">
+                    {{card.user1Rating > card.user2Rating ? '>' : (card.user1Rating == card.user2Rating ? "=" : "<" )}}
+                </div>
+              </td>
+              <td>
+                <div [ngClass]="{'reviewTextMobile': mobile, 'reviewText': !mobile}">
+                    {{card.user2Rating}}
+                </div>                  
+              </td>
+              <td [ngClass]="differenceRatingClasses(card.user1Rating - card.user2Rating)">
+                <div [ngClass]="{'reviewTextMobile': mobile, 'reviewText': !mobile}">{{card.user1Rating - card.user2Rating | number:'1.1-2'}}</div>
+                <div [ngClass]="{'mediumTextSizeMobile': mobile, 'mediumTextSize': !mobile}">{{differenceRatingTextForm(card.user1Rating - card.user2Rating)}}</div>
+              </td>
+            </tr>
+          </ng-container>
+          </table>
+        </div>
+      </div>
+    </div>
+        
+      

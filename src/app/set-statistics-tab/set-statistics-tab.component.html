@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12 text-center">
+      <h1 class="mt-5" style="padding-top:10px">View Set Cards</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12 text-center">
+        <app-card-filter (dataChangeEvent)="updateChart($event)"></app-card-filter>
+        <div *ngIf="cardFilter.allSets.length > 0" style="font-size:14px;padding-top:30px">
+            <p>Select a set to view all cards of that set.</p> 
+            <p *ngIf="mobile">Click Advanced Options to filter cards in the set.</p>
+            <p>Choose colors and group to view a chart for your grouping.</p> 
+        </div>
+        <app-grouped-bar-chart *ngIf="finishedSettingUpBarChartInfo && cardFilter.loadedCardSet" [groupedChartInfo]="groupedChartInfo"></app-grouped-bar-chart>
+        <div *ngIf="!finishedSettingUpBarChartInfo && cardFilter.groupingStatistics1 && cardFilter.loadedCardSet && cardFilter.selectedColors.length>0" style="height:400px"></div>
+        <div *ngIf="cardFilter.displayCards.length > 0" style="margin-top:10px">
+          <span *ngFor="let card of cardFilter.displayCards">
+            <img [src]="card.image_uris.small" [class.mobileImageSpacing] = "mobile"/>
+          </span>
+        </div>
+    </div>
+  </div>
+</div>
+
