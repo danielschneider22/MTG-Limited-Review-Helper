@@ -11,11 +11,11 @@
                 </tr>
                 <tr *ngIf="currentGameCard.type_line.indexOf('Land')==-1">
                     <td>
-                      <img [src]="card.image_uris
-                      ? card.image_uris.normal
-                      : card.card_faces[0].image_uris.normal" class="expandImage" />
-                      <img *ngIf="card.card_faces && card.card_faces[1].image_uris.normal"
-                        [src]="card.card_faces[1].image_uris.normal" class="expandImage"
+                      <img [src]="currentGameCard.image_uris
+                      ? currentGameCard.image_uris.normal
+                      : currentGameCard.card_faces[0].image_uris.normal" class="expandImage" />
+                      <img *ngIf="currentGameCard.card_faces && currentGameCard.card_faces[1].image_uris.normal"
+                        [src]="currentGameCard.card_faces[1].image_uris.normal" class="expandImage"
                       >
                     </td>                
                     <td>
