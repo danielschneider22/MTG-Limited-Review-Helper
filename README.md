@@ -1,3 +1,12 @@
+Updating Set Info:
+https://api.scryfall.com/sets/[set_code]
+
+Update Card Info:
+https://api.scryfall.com/cards/search?q=set%3A[set_code]&unique=cards&as=grid&order=set&page=1
+https://api.scryfall.com/cards/search?q=set%3A[set_code]&unique=cards&as=grid&order=set&page=2
+
+Combine data
+
 # MtgTestApp5
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
