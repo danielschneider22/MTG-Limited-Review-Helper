@@ -7,6 +7,16 @@ https://api.scryfall.com/cards/search?q=set%3A[set_code]&unique=cards&as=grid&or
 
 Combine data
 
+To run app you need 
+Node: 8.9.0
+npm install -g @angular/cli@1.7.4
+
+Run locally
+ng serve
+
+Build
+ng build
+
 # MtgTestApp5
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
